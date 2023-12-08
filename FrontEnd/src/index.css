@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body {
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #5f5f5f;
+    --sb-size: 10px;
+  
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    background-color: #111111;
+  }
+  
+  body::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+.neu{
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 17, 17, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.nav{
+    height: 50px;
+    
+    margin: 30px auto;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    font-family: 'Nunito Sans', sans-serif;
+    position: fixed;
+  }
+
+  .heading1{
+    color: #000;
+    font-family: Poppins;
+    font-size: 65px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-shadow: 0 0 3px #ffffff, 0 0 5px #ffffff;
+  }
+  
+  .logo{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-family: 'Edu TAS Beginner', cursive;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .links{
+    text-align: right;
+  }
+  
+  .link{
+    text-decoration: none;
+    color: black;
+    /* font-weight: l; */
+    padding: 15px;
+    position: relative;
+    top: 12px;
+    
+  }
+  
+  a:hover{
+    color:#5AD666;
+  }
+  
+  
+
+
+  .btn{
+    border-radius: 3px;
+    border: 3px solid #5AD666;
+    background: #111;
+    width: fit-content;
+    padding: 10px;
+    color: #ffffff;
+  }
+
+  .btn:hover{
+    border: 3px solid #111;
+    background: #5AD666;
+    color: #000000;
+  }
+
+  .input[type=text]{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+  }
+  
+  .input[type=text]:focus{
+    border-color:#5AD666;
+    box-shadow:0 0 8px 0 #5AD666;
+  }
+
+  .input[type=email]{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+  }
+  
+  .input[type=email]:focus{
+    border-color:#5AD666;
+    box-shadow:0 0 8px 0 #5AD666;
+  }
+
+  .input[type=password]{
+    width:100%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+  }
+  
+  .input[type=password]:focus{
+    border-color:#5AD666;
+    box-shadow:0 0 8px 0 #5AD666;
+  }

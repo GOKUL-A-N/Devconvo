@@ -1,17 +1,17 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { PORT,MongoDBURL } from './config.js';
-import blogRoutes from './routes/blogRoutes.js';
+import blogRouter from './routes/blogRoutes.js';
 // const blogRouters = require("./routes/blogRoutes.js");
 import cors from "cors";
-import loginRouter from "./routes/loginRoutes.js";
+import userRouter from "./routes/loginRoutes.js";
 import morgan from "morgan";
 
 const app = express();
 
 app.use(express.json());
 
-app.use(cors({origin: true, credentials: true}));
+app.use(cors());
 
 app.use(morgan("dev"));
 
@@ -19,9 +19,9 @@ app.get('/', (req, res) => {
     res.send("Welcome Back Chief!");
 });
 
-app.use('/blogs' , blogRoutes);
+app.use('/blogs' , blogRouter);
 
-app.use('/users', loginRouter); 
+app.use('/users', userRouter); 
 
 mongoose
     .connect(MongoDBURL)

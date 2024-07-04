@@ -36,6 +36,7 @@ import React, { useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
+import { Tab , Tabs } from "@mui/material";
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
@@ -50,27 +51,43 @@ const Navbar = () => {
   // const navigate = useNavigate();
   //state
   const [value, setValue] = useState();
-
+  
   
   return (
     <>
-      <nav className="bg-[#11111] ">
+      <nav className="bg-[#11111] relative">
         <Toolbar>
           <h3 className="logo text-white text-[28px] font-semibold">devconvo</h3>
           {isLogin && (
-            <Box display={"flex"} marginLeft="auto" marginRight={"auto"}>
+            <Box  className="absolute right-3" marginLeft="auto" marginRight={"auto"}>
               <Tabs
                 textColor="inherit"
                 value={value}
+                className="mt-3"
                 onChange={(e, val) => setValue(val)}
               >
-                <Tab label="Blogs" LinkComponent={Link} to="/blogs" />
-                <Tab label="My Blogs" LinkComponent={Link} to="/myblogs" />
-                <Tab
-                  label="createblog"
+                <Button
+                  sx={{ margin: 1, color: "white" }}
                   LinkComponent={Link}
-                  to="/create-blog"
-                />
+                  to="/blogs"
+                >
+                  Blogs
+                </Button>
+                <Button
+                  sx={{ margin: 1, color: "white" }}
+                  LinkComponent={Link}
+                  to="/myblog"
+                >
+                  My Blogs
+                </Button>
+                <Button
+                  sx={{ margin: 1, color: "white" }}
+                  LinkComponent={Link}
+                  to="/createblog"
+                >
+                  Create Blog
+                </Button>
+                
               </Tabs>
             </Box>
           )}

@@ -1,29 +1,33 @@
-// const express = require('express');
 import express from 'express';
+import {
+  getAllBlogsController,
+  createBlogController,
+  updateBlogController,
+  getBlogByIdController,
+  deleteBlogController,
+  userBlogControlller,
+} from "../controllers/blogControlller.js";
 
-// import {getAllBlogsController, createBlogController , singleBlogController , deleteBlogController , myBlogController} from "../controllers/blogController.js";
-import { getAllBlogsController , createBlogController , singleBlogController , deleteBlogController , myBlogController } from '../controllers/blogController.js';
-
+//router object
 const blogRouter = express.Router();
 
+//routes
+// GET || all blogs
+blogRouter.get("/all-blog", getAllBlogsController);
 
-//get all blogs
-blogRouter.get("",getAllBlogsController);
+//POST || create blog
+blogRouter.post("/create-blog", createBlogController);
 
-//post a blog || create a new blog
-blogRouter.post("/createBlog",createBlogController);
+//PUT || update blog
+blogRouter.put("/update-blog/:id", updateBlogController);
 
-//single blog
-blogRouter.post("/singleBlog/:id",singleBlogController);
+//GET || SIngle Blog Details
+blogRouter.get("/get-blog/:id", getBlogByIdController);
 
-//update a blog
-// router.put("updateBlog/:id",updateBlogController);
+//DELETE || delete blog
+blogRouter.delete("/delete-blog/:id", deleteBlogController);
 
-//delete a blog
-blogRouter.delete("/deleteBlog/:id",deleteBlogController);
+//GET || user blog
+blogRouter.get("/user-blog/:id", userBlogControlller);
 
-//my blog
-blogRouter.get("/myBlog/:id",myBlogController);
- 
 export default blogRouter;
-

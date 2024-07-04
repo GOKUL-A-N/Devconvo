@@ -1,28 +1,32 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose"
 
-const blogSchema = mongoose.Schema(
-    {
-        title: {
-            type: 'String',
-            required: true,
-        },
-        user:{
-            type:mongoose.Types.ObjectId, 
-            ref:'User'
-        },
-        description: {
-            type: 'Array',
-            required: true,
-        },
-        image: {
-            type: 'String',
-            required: true,
-        }
+// const urlRegex = /^(https?:\/\/)?([\d\w]+\.)+[a-z]{2,6}\/?$/;
+
+const blogSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      require: [true, "title is required"],
     },
-    {
-        timestamps: true,
-    }
-)
+    description: {
+      type: String,
+      required: [true, "description is require"],
+    },
+    // image: {
+    //   type: String,
+    //   required: [true, "image is require"],
+    //   // match: urlRegex,  
+    // },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+      require: [true, "user id is required"],
+    },
+  },
+  { timestamps: true }
+);
+
+const blogModel = mongoose.model("Blog", blogSchema);
 
 
-export const Blogs = mongoose.model('blog',blogSchema);
+export default blogModel;

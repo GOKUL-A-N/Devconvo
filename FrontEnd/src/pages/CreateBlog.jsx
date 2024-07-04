@@ -1,41 +1,77 @@
-import React from 'react'
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Navbar from "../components/Navbar";
 
 const CreateBlog = () => {
+  const id = localStorage.getItem("userId");
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    title: "",
+    description: "",
+    image: "",
+  });
+  // input change
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  //form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:5500/blogs/create-blog", {
+        title: inputs.title,
+        description: inputs.description,
+        // image: inputs.image,
+        user: id,
+      });
+      if (data?.success) {
+        toast.success("Blog Created");
+        navigate("/blogs");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className=''>
-      <div className='h-96 w-[90%] p-0 sm:p-4 md:p-10'>
-        <h1 className='p-4 font-bold text-white text-[40px] text-center'>Share Your <span className='text-[#5ad666]'>Thoughts</span></h1>
-      <form className="w-full m-10">
-  <div className="flex flex-wrap -mx-3 mb-6">
-    <div className ="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+    <>
+    <Navbar />
+      <h3 className="text-[32px]  text-white font-bold text-center mt-10">Donate Your Knowledge</h3>
+      <form onSubmit={handleSubmit} className="sm:p-10 sm:mt-10">
+      <div className="flex flex-wrap -mx-3 mb-6">
+    <div className ="w-full md:w-full px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
         Title
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name='title' type="text" placeholder="Title" />
-      <p className="text-red-500 text-xs italic">Please fill out this field.</p>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" name="title" onChange={handleChange} value={inputs.title} placeholder="Title" />
+      {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
     </div>
-    <div className="w-full md:w-1/2 px-3">
+    {/* <div className="w-full md:w-full px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-        Name
+        Image
       </label>
-      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" name='name' type="text" placeholder="Name" />
-    </div>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" onChange={handleChange} name='image' type="text" placeholder="Image" />
+    </div> */}
   </div>
-  <div className="flex flex-wrap -mx-3 mb-6">
+  {/* <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
         Email Address
       </label>
       <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" name='email' type="email" placeholder="********@*****.**" />
     </div>
-  </div>
+  </div> */}
     
     <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full px-3">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-        Content
+        Your Message
       </label>
-      <textarea name='message' rows="50" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+      <textarea name='description' onChange={handleChange} value={inputs.description} rows="10" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
         
       </textarea>
     </div>
@@ -49,16 +85,14 @@ const CreateBlog = () => {
         </label> */}
       </div>
       <button className="btn" type="submit">
-        <h6 className='p-1 '>Share</h6> 
+        Send Message
       </button>
     </div>
       
   </div>
-    
-</form>
-      </div>
-    </div>
-  )
-}
+      </form>
+    </>
+  );
+};
 
-export default CreateBlog
+export default CreateBlog;
